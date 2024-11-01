@@ -1,0 +1,32 @@
+@use "functions";
+
+// Background colors
+$background-light: hsl(0, 0%, 99%);
+$background-dark: hsl(203, 19%, 24%);
+
+// Color generation based on theme
+$colors-light: (
+  red:    functions.generate-color(  0, false),
+  orange: functions.generate-color( 30, false),
+  yellow: functions.generate-color( 60, false),
+  green:  functions.generate-color(100, false),
+  cyan:   functions.generate-color(180, false),
+  blue:   functions.generate-color(210, false),   // Light theme
+  magenta:functions.generate-color(300, false),
+  pink:   functions.generate-color(330, false),
+);
+
+$colors-dark: (
+  red:    functions.generate-color(  0, true),
+  orange: functions.generate-color( 30, true),
+  yellow: functions.generate-color( 60, true),
+  //90?? //light green
+  green:  functions.generate-color(120, true),
+  //150?? //minty green
+  cyan:   functions.generate-color(180, true),
+  blue:   functions.generate-color(210, true),
+  //240?? //hard blue
+  //270?? //purple
+  magenta:functions.generate-color(300, true),
+  pink:   functions.generate-color(330, true),
+);

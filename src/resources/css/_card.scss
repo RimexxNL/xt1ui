@@ -1,0 +1,45 @@
+@use "../helpers/mixins";
+
+.xt1card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid var(--xt1-color-border);
+    overflow: hidden;
+    height: fit-content;
+
+    &.raised {
+        @include mixins.raised();
+    }
+
+    &.rounded {
+        @include mixins.rounded();
+    }
+
+    .xt1card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        height: 40px;
+        max-height: 40px;
+        min-height: 40px;
+        font-weight: 400;
+        background-color: var(--xt1-container);
+        overflow: hidden;
+    }
+
+    .xt1card-content {
+        display: flex;
+        flex-direction: column;
+        padding:10px;
+    }
+
+    .xt1card-footer {
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        align-items: flex-start;
+        border-top:1px dashed var(--xt1-color-border);
+    }
+}

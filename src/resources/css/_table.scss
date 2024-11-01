@@ -1,0 +1,24 @@
+.xt1table {
+    border-spacing: 0;
+    border-top: 1px solid var(--xt1-color-border);
+    border-left: 1px solid var(--xt1-color-border);
+
+    thead {
+        tr {
+            th {
+                padding: 5px;
+                border-right: 1px solid var(--xt1-color-border);
+                border-bottom: 1px solid var(--xt1-color-border);
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                padding: 5px;
+                border-right: 1px solid var(--xt1-color-border);
+                border-bottom: 1px solid var(--xt1-color-border);
+            }
+        }
+    }
+}

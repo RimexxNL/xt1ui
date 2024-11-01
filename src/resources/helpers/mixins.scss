@@ -1,0 +1,21 @@
+@mixin raised() {
+    box-shadow: var(--xt1-box-shadow);
+
+    &:not(.disabled):active {
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+}
+
+@mixin rounded() {
+    border-radius: 5px;
+}
+
+@mixin outlined() {
+    background-color: transparent;
+    border: 1px solid var(--xt1-primary);
+    color: var(--xt1-primary);
+    &:hover {
+        color: #fff;
+        border-color: var(--xt1-primary-hover);
+    }
+}

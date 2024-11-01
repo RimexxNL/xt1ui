@@ -1,0 +1,12 @@
+.xt1textInput {
+    background-color: transparent;
+    border-radius:5px;
+    border: 1px solid var(--xt1-color-border);
+    color: var(--xt1-color-text);
+    user-select: all;
+    padding-left: 5px;
+
+    &::selection {
+       background-color: var(--xt1-primary);
+    }
+}

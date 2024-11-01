@@ -1,0 +1,124 @@
+@use "../helpers/reset";
+@use "../helpers/theme";
+@use "../helpers/functions";
+@use "sass:color";
+@use "../helpers/spacing";
+@use "../helpers/defaults";
+
+@use "card";
+@use "table";
+@use "button";
+@use "navmenu";
+@use "textinput";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@mixin theme-styles($name, $color, $theme) {
+    @if $theme == light {
+        --xt1-background: #{theme.$background-light};
+        --xt1-container: #{color.adjust(theme.$background-light, $lightness: -3%, $space: hsl)};
+        --xt1-primary: #{$color};
+        --xt1-primary-active: #{color.adjust($color, $lightness: 20%)};
+        --xt1-primary-hover: #{color.adjust($color, $lightness: 15%)};
+        --xt1-primary-bright: #{color.adjust($color, $lightness: 55%)};
+        --xt1-color-text:  hsl(0, 0%, 10%);
+        @each $name, $color in theme.$colors-light {
+            --xt1-#{''+$name}: #{functions.to-hex($color)};
+        }
+        --xt1-color-border: hsl(0, 0%, 90%);
+    }
+    @else if $theme == dark {
+        --xt1-background: #{theme.$background-dark};
+        --xt1-container: #{color.adjust(theme.$background-dark, $lightness: -10%, $space: hsl)};
+        --xt1-primary: #{$color};
+        --xt1-primary-active: #{color.adjust($color, $lightness: 20%)};
+        --xt1-primary-hover: #{color.adjust($color, $lightness: 10%)};
+        --xt1-primary-bright: #{color.adjust($color, $lightness: 55%)};
+        --xt1-color-text: hsl(0, 0%, 75%);
+        @each $name, $color in theme.$colors-dark {
+            --xt1-#{''+$name}: #{functions.to-hex($color)};
+        }
+        --xt1-color-border: hsl(0, 0%, 40%);
+    }
+    --xt1-font-family: "Inter", Verdana, Geneva, Tahoma, sans-serif;
+    --xt1-box-shadow:   0 1px 1px hsla(0, 0%, 0%, 0.075),
+                        0 2px 2px hsla(0, 0%, 0%, 0.055),
+                        0 4px 4px hsla(0, 0%, 0%, 0.035),
+                        0 8px 8px hsla(0, 0%, 0%, 0.015);
+}
+
+// generate ranges of our base colors for light theme
+// --{color}-1 .. --{color}-8
+:root[data-theme="light"] {
+    @each $name, $color in theme.$colors-light {
+        @for $i from 0 through 14 {
+            --#{''+$name}-#{$i+1}: #{functions.to-hex(color.adjust($color, $lightness: (-15%+($i*5))))};
+        }
+    }
+}
+
+// generate ranges of our base colors for dark theme
+// --{color}-1 .. --{color}-8
+:root[data-theme="dark"] {
+    @each $name, $color in theme.$colors-dark {
+        @for $i from 0 through 14 {
+            --#{''+$name}-#{$i+1}: #{functions.to-hex(color.adjust($color, $lightness: (-20%+($i*5))))};
+        }
+    }
+}
+
+@each $name, $color in theme.$colors-light {
+    // Light theme
+    html[data-theme="light"][data-accent="#{'' + $name}"] {
+        @include theme-styles($name, $color, light);
+    };    
+}
+
+@each $name, $color in theme.$colors-dark {
+    // Dark theme
+    html[data-theme="dark"][data-accent="#{'' + $name}"] {
+        @include theme-styles($name, $color, dark);
+    };
+}
+
+
+html, body {
+    background-color: var(--xt1-background);
+    font-family: var(--xt1-font-family), sans-serif;
+    font-weight: 200;
+    font-size: 0.9rem;
+    width: 100%;
+    height: 100%;
+    color: var(--xt1-color-text);
+}
+
+.danger {
+    background-color:red;
+}
+
+.cm-editor {
+    background-color: transparent !important;
+}
+
+::-webkit-scrollbar {
+    background: var(--xt1-primary);
+    width: 0.7em;
+    height: 0.7em;
+}
+::-webkit-scrollbar-track {
+    background: var(--xt1-color-border);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--xt1-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--xt1-primary-hover);
+}
+
+::-webkit-scrollbar-corner {
+    //background: transparent;
+    //border:1px solid red;
+}

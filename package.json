@@ -1,0 +1,44 @@
+{
+  "name": "@rimexx/xt1ui",
+  "version": "1.0.0-beta1",
+  "description": "",
+  "author": "Marc Donkers <marc@rimexx.nl>",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RimexxNL/xt1ui.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@emotion/styled": "^11.13.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "rollup": "^4.24.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "sass": "^1.80.5",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.3.1",
+    "react-dom": "^17.0.0 || ^18.3.1",
+    "react-router-dom": "^6.27.0"
+  }
+}

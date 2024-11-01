@@ -1,0 +1,135 @@
+@use "sass:color";
+@use "../helpers/mixins";
+
+.xt1button {
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    padding: 7px 15px;
+    font-weight: 300;
+    text-decoration: none;
+    gap: 5px;
+    font-size: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    background: var(--xt1-primary);
+    transition: all 150ms linear;
+    z-index:1;
+    border: 0;
+    user-select: none;
+    overflow: hidden;
+
+    &.disabled {
+        background-color: lightgray;
+        color: #a0a0a0;
+        cursor: not-allowed !important;
+    }
+
+    &.danger {
+        background-color: var(--xt1-red);
+
+        &.outlined {
+            color: var(--xt1-red);
+            border: 1px solid var(--xt1-red);
+
+            &:hover {
+                border: 1px solid var(--red-8);
+            }
+        }
+
+        &:active:after {
+            background-color: var(--xt1-red);
+        }
+    }
+
+    &.raised {
+        @include mixins.raised();
+    }
+
+    &:is(.disabled):before {
+        background-color: lightgray !important;
+    }
+
+    &:is(.disabled):active {
+        padding-top:7px !important;
+        padding-bottom: 7px !important;
+    }
+
+    &:active {
+        background-color: var(--xt1-primary-active);
+        padding-top:8px;
+        padding-bottom:6px;
+    }
+
+    &:active:after {
+        background-color: var(--xt1-primary-active);
+
+        &.danger {
+            background-color: var(--red-7) !important;
+        }
+    }
+    &:active:before {
+        background-color: var(--xt1-primary-active);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        border-radius: 0;
+    }
+
+    &.effect:before {
+        transition: all 0.25s;
+    }
+
+    &.danger:before {
+        background-color: var(--red-8);
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: var(--xt1-primary-hover);
+        border-radius: 0;
+        z-index: -1;
+    }
+
+    &:hover:not(.disabled) {
+        color: #fff;
+    }
+    &:hover:before {
+        width: 100%;
+    }
+
+    &.rounded {
+        @include mixins.rounded();
+    }
+
+    &.outlined {
+        @include mixins.outlined();
+    }
+}
+
+html[data-theme="dark"] {
+    .xt1button {
+        &.outlined {
+            color: var(--xt1-primary-active);
+            &.danger {
+              color: var(--red-9);
+            }
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

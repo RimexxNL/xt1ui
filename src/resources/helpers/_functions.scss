@@ -1,0 +1,26 @@
+@use "sass:color";
+@use "sass:string";
+
+// Function to convert a color to the hex format eg. #AB3FA1
+@function to-hex($color) {
+    $ie-hex: ie_hex_str($color);
+    @return #{"#" + string.slice($ie-hex, 4)};
+}
+
+// Function to generate colors based on hue with fixed saturation and lightness
+@function generate-color($hue, $is-dark) {
+    @if $is-dark {
+        @return hsl($hue, 70%, 30%); // Lighter color for dark backgrounds
+    } @else {
+        @return hsl($hue, 70%, 40%); // Darker color for light backgrounds
+    }
+}
+
+// Function to convert a hex color to rgb(a)
+@function hex-to-rgba($color, $opacity) {
+    $red: color.channel($color, "red", $space: rgb);
+    $green: color.channel($color, "green", $space: rgb);
+    $blue: color.channel($color, "blue", $space: rgb);
+    
+    @return rgba($red, $green, $blue, $opacity);
+}
