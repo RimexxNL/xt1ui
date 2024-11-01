@@ -5,7 +5,9 @@
 @use "../helpers/spacing";
 @use "../helpers/defaults";
 
+@use "flex";
 @use "card";
+@use "panel";
 @use "table";
 @use "button";
 @use "navmenu";

@@ -24,3 +24,12 @@ input:focus, button:focus {
 .w-50 { width: 50% }
 .w-75 { width: 75% }
 .w-100 { width: 100% }
+
+.flex-col { flex-direction: column }
+.flex-row { flex-direction: row }
+.flex-wrap { flex-wrap: wrap }
+.flex-nowrap { flex-wrap: nowrap }
+
+.align-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-space-between { justify-content: space-between; }

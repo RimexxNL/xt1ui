@@ -1,15 +1,4 @@
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode } from "react"
-import styled from '@emotion/styled'
-
-// Define the styled Flex component
-const StyledFlex = styled.div<FlexProps>`
-    display: flex;
-    flex-direction: ${(props) => props.vertical ? 'column' : 'row'};
-    justify-content: ${(props) => props.justify || 'flex-start'};
-    align-items: ${(props) => props.align || 'stretch'};
-    flex-wrap: ${(props) => props.wrap || 'nowrap'};
-    gap: ${(props) => props.gap || 0}px;
-`
 
 interface FlexProps extends HTMLAttributes<HTMLDivElement> {
     children: ReactNode;
@@ -19,20 +8,33 @@ interface FlexProps extends HTMLAttributes<HTMLDivElement> {
     gap?: number;
     vertical?: boolean;
     className?: string;
+    style?: CSSProperties;
 }
 
-const Flex: FC<FlexProps> = ({ children, justify, align, wrap, gap, className, ...props }) => {
+const baseFlexClasses = ["xt1flex"]
+
+const Flex: FC<FlexProps> = ({ children, justify, align, wrap, gap,vertical,className, style, ...rest }) => {
+
+    const classes = [...baseFlexClasses, className]
+    const styles:CSSProperties = style || {}
+
+    if (justify) classes.push(`justify-${justify}`)
+    if (align) classes.push(`align-${align}`)
+    if (wrap) classes.push(`flex-${wrap}`)
+    if (gap) styles.gap = `${gap}px`
+
+    if (vertical) { classes.push(`flex-col`) } else { classes.push(`flex-row`) }
+
+    const resultClasses = classes.join(' ')
+
     return (
-        <StyledFlex
-            justify={justify}
-            align={align}
-            wrap={wrap}
-            gap={gap}
-            className={className}  // Allow additional classes for styling if needed
-            {...props}
+        <div
+            className={resultClasses}
+            style={styles}
+            {...rest}
         >
             {children}
-        </StyledFlex>
+        </div>
     )
 }
 

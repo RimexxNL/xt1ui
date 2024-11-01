@@ -1,28 +1,26 @@
 import React, { FC, HTMLAttributes, ReactNode } from "react"
-import styled from '@emotion/styled'
-
-// Define the styled Flex component
-const StyledPanel = styled.div<PanelProps>`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    background-color: var(--xt1-container);
-    color: var(--xt1-color-text);
-`
+import {ApplyFeatures} from "../helpers";
+import {FeatureProps} from "../types";
 
 interface PanelProps extends HTMLAttributes<HTMLDivElement> {
-    children: ReactNode;
-    className?: string;
+    children?: ReactNode
+    features?: FeatureProps
+    className?: string
 }
 
-const Panel: FC<PanelProps> = ({ children, className, ...props }) => {
+const basePanelClasses = ["xt1panel"]
+
+const Panel: FC<PanelProps> = ({ children, className, features, ...rest }) => {
+
+    const classes = [...basePanelClasses, className, ...ApplyFeatures(features || {},false,false)].join(' ')
+
     return (
-        <StyledPanel
-            className={className}  // Allow additional classes for styling if needed
-            {...props}
+        <div
+            className={classes}
+            {...rest}
         >
             {children}
-        </StyledPanel>
+        </div>
     )
 }
 
