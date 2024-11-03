@@ -1,9 +1,10 @@
-@use "../helpers/reset";
-@use "../helpers/theme";
-@use "../helpers/functions";
+@use "../scss_helpers/reset";
+@use "../scss_helpers/theme";
+@use "../scss_helpers/functions";
 @use "sass:color";
-@use "../helpers/spacing";
-@use "../helpers/defaults";
+@use "../scss_helpers/spacing";
+@use "../scss_helpers/defaults";
+@use "../scss_helpers/mixins";
 
 @use "flex";
 @use "card";
@@ -12,6 +13,7 @@
 @use "button";
 @use "navmenu";
 @use "textinput";
+@use "divider";
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
@@ -98,22 +100,29 @@ html, body {
     background-color:red;
 }
 
+.rounded {
+    @include mixins.rounded();
+}
+
+.raised {
+    @include mixins.raised();
+}
+
 .cm-editor {
     background-color: transparent !important;
 }
 
 ::-webkit-scrollbar {
     background: var(--xt1-primary);
-    width: 0.7em;
-    height: 0.7em;
+    width: 0.5em;
+    height: 0.5em;
 }
 ::-webkit-scrollbar-track {
-    background: var(--xt1-color-border);
+    background: var(--xt1-background);
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--xt1-primary);
-    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -121,6 +130,4 @@ html, body {
 }
 
 ::-webkit-scrollbar-corner {
-    //background: transparent;
-    //border:1px solid red;
 }

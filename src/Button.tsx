@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, ReactNode, useCallback } from "react"
-import {FeatureProps} from "../types"
-import {ApplyFeatures} from "../helpers"
+import {FeatureProps, SimpleDirections} from "./resources/typescript/types"
+import {ApplyFeatures} from "./resources/typescript/helpers"
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement>{
     children: ReactNode
     icon?: ReactElement
-    iconPos?: 'left' | 'right'
+    iconPos?: SimpleDirections
     features?: FeatureProps
     danger?: boolean
     disabled?: boolean

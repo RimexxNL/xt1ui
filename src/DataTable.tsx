@@ -3,6 +3,7 @@ import React, {FC, ReactElement} from "react"
 interface DataTableProps {
     columns: TableColumn[]
     items: TableRow[]
+    className?: string
 }
 
 export interface TableColumn {
@@ -14,10 +15,16 @@ export interface TableColumn {
 export interface TableRow {
     [key: string]: string | ReactElement
 }
-const DataTable:FC<DataTableProps> = ({columns, items}) => {
+
+const baseDataTableClasses = ["xt1table"]
+
+const DataTable:FC<DataTableProps> = ({columns, items, className}) => {
+
+    const classes = [...baseDataTableClasses, className].join(' ')
+
     return (
         <>
-            <table className={`xt1table`} style={{width:"100%"}}>
+            <table className={classes} style={{width:"100%"}}>
                 <thead>
                     <tr key={`dtc-row`}>
                         {columns.map((column, index) => {

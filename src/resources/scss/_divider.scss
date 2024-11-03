@@ -1,0 +1,40 @@
+@use "../scss_helpers/mixins";
+
+.xt1divider {
+    position: relative;
+    width: 100%;
+    border-bottom:1px solid var(--xt1-primary);
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    &.dashed {
+        border-style: dashed;
+    }
+
+    &.dotted {
+        border-style: dotted;
+    }
+
+    .xt1divider-label {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        margin-top: -.7em;
+        padding-left: .5em;
+        padding-right: .5em;
+
+        &.xt1divider-label-pos-left {
+            left: 1em;
+        }
+        &.xt1divider-label-pos-right {
+            right: 1em;
+        }
+        &.xt1divider-label-pos-center {
+            left: 50%;
+        }
+    }
+
+    &.raised {
+        @include mixins.raised();
+    }
+}

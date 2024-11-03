@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "../helpers/mixins";
+@use "../scss_helpers/mixins";
 
 .xt1button {
     color: white;
@@ -117,6 +117,21 @@
 
     &.outlined {
         @include mixins.outlined();
+
+        &.dashed {
+            border-style: dashed;
+        }
+
+        &.dotted {
+            border-style: dotted;
+        }
+
+        &.disabled {
+            border-color: lightgray;
+            background-color: transparent;
+            color: #a0a0a0;
+            cursor: not-allowed !important;
+        }
     }
 }
 

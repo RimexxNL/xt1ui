@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from "react"
-import {FeatureProps} from "../types"
-import {ApplyFeatures} from "../helpers"
+import {FeatureProps} from "./resources/typescript/types"
+import {ApplyFeatures} from "./resources/typescript/helpers"
 
 export interface CardProps {
     children?: ReactElement

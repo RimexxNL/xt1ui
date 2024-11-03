@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, ReactNode } from "react"
-import {ApplyFeatures} from "../helpers";
-import {FeatureProps} from "../types";
+import {ApplyFeatures} from "./resources/typescript/helpers";
+import {FeatureProps} from "./resources/typescript/types";
 
 interface PanelProps extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode

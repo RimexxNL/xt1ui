@@ -3,7 +3,9 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import pkg from './package.json' assert { type: 'json' };
+import sass from 'sass';
+import { createRequire } from "module";
+const pkg = createRequire(import.meta.url)("./package.json");
 
 export default {
     input: 'src/index.ts',
@@ -30,12 +32,13 @@ export default {
             extensions: ['.scss'],
             use: [
                 ['sass', {
-                    includePaths: ['./src/resources/css']
+                    implementation: sass,
+                    silenceDeprecations: ["legacy-js-api"],
+                    includePaths: ['./src/resources/scss']
                 }]
             ],
             inject: true,
-            // extract: true, // Extracts CSS into a separate file
-            minimize: true, // Minifies the CSS
+            minimize: true,
             sourceMap: true,
         }),
 

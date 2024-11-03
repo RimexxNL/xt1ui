@@ -1,19 +1,20 @@
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode } from "react"
+import {GenericClickEvent} from "./resources/typescript/types";
 
 interface FlexProps extends HTMLAttributes<HTMLDivElement> {
-    children: ReactNode;
-    justify?: CSSProperties['justifyContent'];
-    align?: CSSProperties['alignItems'];
-    wrap?: CSSProperties['flexWrap'];
-    gap?: number;
-    vertical?: boolean;
-    className?: string;
-    style?: CSSProperties;
+    children?: ReactNode
+    justify?: CSSProperties['justifyContent']
+    align?: CSSProperties['alignItems']
+    wrap?: CSSProperties['flexWrap']
+    gap?: number
+    vertical?: boolean
+    className?: string
+    style?: CSSProperties
 }
 
 const baseFlexClasses = ["xt1flex"]
 
-const Flex: FC<FlexProps> = ({ children, justify, align, wrap, gap,vertical,className, style, ...rest }) => {
+const Flex: FC<FlexProps> = ({ children, justify, align, wrap, gap,vertical,className,style, ...rest }) => {
 
     const classes = [...baseFlexClasses, className]
     const styles:CSSProperties = style || {}
