@@ -1,5 +1,4 @@
-import React, { CSSProperties, FC, HTMLAttributes, ReactNode } from "react"
-import {GenericClickEvent} from "./resources/typescript/types";
+import React, {CSSProperties, FC, HTMLAttributes, LegacyRef, ReactNode} from "react"
 
 interface FlexProps extends HTMLAttributes<HTMLDivElement> {
     children?: ReactNode
@@ -14,9 +13,9 @@ interface FlexProps extends HTMLAttributes<HTMLDivElement> {
 
 const baseFlexClasses = ["xt1flex"]
 
-const Flex: FC<FlexProps> = ({ children, justify, align, wrap, gap,vertical,className,style, ...rest }) => {
+const Flex = ({ children, justify, align, wrap, gap,vertical,className,style, ...rest }:FlexProps) => {
 
-    const classes = [...baseFlexClasses, className]
+    const classes = [...baseFlexClasses, className].filter(Boolean)
     const styles:CSSProperties = style || {}
 
     if (justify) classes.push(`justify-${justify}`)

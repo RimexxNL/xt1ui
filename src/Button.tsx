@@ -52,7 +52,6 @@ const Button:FC<ButtonProps> = ({icon, iconPos='left',features,children,danger,d
             onClick={handleClick}
             onKeyDown={handleKeyDown}
             role="button"
-            tabIndex={0}
             aria-label={label}
             aria-disabled={disabled}
             {...rest}
