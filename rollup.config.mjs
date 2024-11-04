@@ -38,6 +38,7 @@ export default {
                 }]
             ],
             inject: true,
+            // extract: true,
             minimize: true,
             sourceMap: true,
         }),

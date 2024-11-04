@@ -20,6 +20,7 @@
 @mixin theme-styles($name, $color, $theme) {
     @if $theme == light {
         --xt1-background: #{theme.$background-light};
+        --xt1-background-50: #{rgba(theme.$background-light, 0.5)};
         --xt1-container: #{color.adjust(theme.$background-light, $lightness: -3%, $space: hsl)};
         --xt1-primary: #{$color};
         --xt1-primary-active: #{color.adjust($color, $lightness: 20%)};
