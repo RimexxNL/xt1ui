@@ -2,7 +2,7 @@ import React, {createContext, ReactNode, useContext, useEffect, useState} from "
 import {AccentColors, LightDarkTheme, SystemTheme} from "../resources/typescript/types";
 
 const ThemeContext = createContext({
-    theme: 'light',
+    theme: 'system',
     accent: 'blue',
     toggleTheme: () => {},
     setAccent: (_accent:AccentColors) => {},
@@ -13,64 +13,89 @@ export const useTheme = () => useContext(ThemeContext)
 
 interface ThemeProviderProps {
     children: ReactNode
+    defaultTheme?: SystemTheme
+    defaultAccent?: AccentColors
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({children}) => {
-    const [theme, setThemeScheme] = useState<LightDarkTheme>('light')
-    const [accent, setAccentColor] = useState<AccentColors>('blue')
+const ThemeProvider: React.FC<ThemeProviderProps> = ({children, defaultTheme="system", defaultAccent}) => {
+    const [theme, setThemeScheme] = useState<SystemTheme>(defaultTheme)
+    const [accent, setAccentColor] = useState<AccentColors>(defaultAccent)
 
     const htmlTag:HTMLElement = document.documentElement
 
     useEffect(() => {
 
-        // register event listener to detect operating system dark/light changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', async(e) => {
-            const newColorScheme = e.matches ? "dark" : "light"
-            const storedTheme = localStorage.getItem("xt1theme")
-            if (storedTheme === null) {
-                setThemeScheme(newColorScheme === 'dark' ? 'dark' : 'light')
-                htmlTag.setAttribute("data-theme", newColorScheme)
-            }
-        })
-
         // Asynchronously retrieve the stored theme preference
         const determineTheme = async () => {
             try {
                 const storedTheme = localStorage.getItem("xt1theme")
-                let foundScheme = "light"
+                // internally we set our start decision to light
+                let decidedTheme = "light"
+
+                // when we do not have a storedTheme
                 if (storedTheme === null) {
-                    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                        foundScheme = "dark"
+                    // and the defaultTheme is set to system
+                    if (defaultTheme==="system") {
+                        // we check the OS if it's set to dark
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            decidedTheme = "dark"
+                        }
+                    } else if (defaultTheme === "light" || defaultTheme === "dark") {
+                        decidedTheme = defaultTheme
                     }
                 } else {
-                    setThemeScheme(storedTheme === 'light' ? 'light' : 'dark')
-                    htmlTag.setAttribute("data-theme", storedTheme === 'light' ? 'light' : 'dark')
-                    return
+                    // if storedTheme is actually set, we set theme accordingly
+                    if (storedTheme === "system") {
+                        // we check the OS if it's set to dark
+                        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            decidedTheme = "dark"
+                        }
+                    } else if (storedTheme === "light" || storedTheme === "dark") {
+                        decidedTheme = storedTheme
+                    }
                 }
 
-                setThemeScheme(foundScheme === 'dark' ? 'dark' : 'light')
-
-                document.documentElement.setAttribute("data-theme", foundScheme)
+                setThemeScheme(decidedTheme as SystemTheme)
+                htmlTag.setAttribute("data-theme", decidedTheme)
 
             } catch (error) {
                 console.error('Failed to initialize theme:', error)
             }
         }
 
+
+        // register event listener to detect operating system dark/light changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', async (e) => {
+            const newColorScheme = e.matches ? "dark" : "light"
+            const storedTheme = localStorage.getItem("xt1theme")
+            if (storedTheme === null || storedTheme === "system") {
+                setThemeScheme(newColorScheme === 'dark' ? 'dark' : 'light')
+                htmlTag.setAttribute("data-theme", newColorScheme)
+            }
+        })
+
+
         const determineAccent = async () => {
+            let decidedAccent = 'blue'
+
             try {
                 const storedAccent = localStorage.getItem("xt1accent")
                 if (storedAccent !== null) {
-                    setAccentColor(storedAccent as AccentColors)
-                    htmlTag.setAttribute("data-accent", storedAccent)
+                    decidedAccent = storedAccent
+
+                } else if (defaultAccent !== undefined) {
+                    decidedAccent = defaultAccent
                 }
+
+                setAccentColor(decidedAccent as AccentColors)
+                htmlTag.setAttribute("data-accent", decidedAccent)
             } catch (error) {
                 console.error('Failed to initialize accent', error)
             }
         }
 
-        determineAccent().then(() => {})
         determineTheme().then(() => {})
+        determineAccent().then(() => {})
 
         return () => {}
     },[])
