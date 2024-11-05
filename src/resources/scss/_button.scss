@@ -21,8 +21,8 @@
     overflow: hidden;
 
     &.disabled {
-        background-color: lightgray;
-        color: #a0a0a0;
+        background-color: var(--xt1-color-disabled);
+        color: var(--xt1-color-text-disabled);
         cursor: not-allowed !important;
     }
 
@@ -48,7 +48,7 @@
     }
 
     &:is(.disabled):before {
-        background-color: lightgray !important;
+        background-color: var(--xt1-color-disabled) !important;
     }
 
     &:is(.disabled):active {
@@ -127,24 +127,24 @@
         }
 
         &.disabled {
-            border-color: lightgray;
+            border-color: var(--xt1-color-disabled);
             background-color: transparent;
-            color: #a0a0a0;
+            color: var(--xt1-color-text-disabled);
             cursor: not-allowed !important;
         }
     }
 }
 
-html[data-theme="dark"] {
-    .xt1button {
-        &.outlined {
-            color: var(--xt1-primary-active);
-            &.danger {
-              color: var(--red-9);
-            }
-            &:hover {
-                color: #fff;
-            }
-        }
-    }
-}
+//html[data-theme="dark"] {
+//    .xt1button {
+//        &.outlined {
+//            color: var(--xt1-primary-active);
+//            &.danger {
+//              color: var(--red-9);
+//            }
+//            &:hover {
+//                color: #fff;
+//            }
+//        }
+//    }
+//}

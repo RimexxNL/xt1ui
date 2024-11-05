@@ -27,24 +27,33 @@
         --xt1-primary-hover: #{color.adjust($color, $lightness: 15%)};
         --xt1-primary-bright: #{color.adjust($color, $lightness: 55%)};
         --xt1-color-text:  hsl(0, 0%, 10%);
+        --xt1-color-text-disabled:  hsl(0, 0%, 63%);
+
         @each $name, $color in theme.$colors-light {
             --xt1-#{''+$name}: #{functions.to-hex($color)};
         }
         --xt1-color-border: hsl(0, 0%, 90%);
+        --xt1-color-disabled: hsl(0, 0%, 83%);
     }
+
     @else if $theme == dark {
         --xt1-background: #{theme.$background-dark};
-        --xt1-container: #{color.adjust(theme.$background-dark, $lightness: -10%, $space: hsl)};
+        --xt1-container: #{color.adjust(theme.$background-dark, $lightness: -4%, $space: hsl)};
         --xt1-primary: #{$color};
         --xt1-primary-active: #{color.adjust($color, $lightness: 20%)};
         --xt1-primary-hover: #{color.adjust($color, $lightness: 10%)};
         --xt1-primary-bright: #{color.adjust($color, $lightness: 55%)};
         --xt1-color-text: hsl(0, 0%, 75%);
+        --xt1-color-text-disabled:  hsl(0, 0%, 48%);
+
         @each $name, $color in theme.$colors-dark {
             --xt1-#{''+$name}: #{functions.to-hex($color)};
         }
-        --xt1-color-border: hsl(0, 0%, 40%);
+
+        --xt1-color-border: hsl(0, 0%, 20%);
+        --xt1-color-disabled: hsl(0, 0%, 33%);
     }
+
     --xt1-font-family: "Inter", Verdana, Geneva, Tahoma, sans-serif;
     --xt1-box-shadow:   0 1px 1px hsla(0, 0%, 0%, 0.075),
                         0 2px 2px hsla(0, 0%, 0%, 0.055),
@@ -86,12 +95,11 @@
     };
 }
 
-
 html, body {
     background-color: var(--xt1-background);
     font-family: var(--xt1-font-family), sans-serif;
     font-weight: 200;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     width: 100%;
     height: 100%;
     color: var(--xt1-color-text);
