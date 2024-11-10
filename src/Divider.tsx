@@ -68,7 +68,7 @@ const Divider:FC<DividerProps> = ({label,labelPos,features}) => {
     return (
         <div className={classes}>
             { label && (
-                <div id={`xt1-divider-label-${rand}`} className={`xt1divider-label ${labelPosition}`}>
+                <div id={`xt1-divider-label-${rand || `ai4h3`}`} className={`xt1divider-label ${labelPosition}`}>
                     {label}
                 </div>
             )}
